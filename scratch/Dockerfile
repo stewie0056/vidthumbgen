@@ -32,7 +32,7 @@ ENV         FFMPEG_VERSION=4.0.2     \
             FONTCONFIG_VERSION=2.12.4 \
             LIBVIDSTAB_VERSION=1.1.0  \
             KVAZAAR_VERSION=1.2.0     \
-            AOM_VERSION=master        \
+            AOM_VERSION=d14c5bb4f336ef1842046089849dee4a301fbbf0        \
             SRC=/usr/local
 
 ARG         OGG_SHA256SUM="e19ee34711d7af328cb26287f4137e70630e7261b17cbe3cd41011d73a654692  libogg-1.3.2.tar.gz"
@@ -359,13 +359,7 @@ RUN \
 
 ### Release Stage
 FROM        scratch AS release
-MAINTAINER  Julien Rottenberg <julien@rottenberg.info>
 
-CMD         ["--help"]
-ENTRYPOINT  ["/bin/ffmpeg"]
+ENTRYPOINT  ["/bin/sh"]
 
 COPY --from=build /tmp/fakeroot/ /
-
-
-# Let's make sure the app built correctly
-# Convenient to verify on https://hub.docker.com/r/jrottenberg/ffmpeg/builds/ console output
